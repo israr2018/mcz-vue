@@ -21,6 +21,12 @@
         <li class="nav-item">
           <router-link to="/post-car-ad" class="nav-link">Post Car Ad</router-link>
         </li>
+        <li class="nav-item">
+          <router-link to="/upload-csv" class="nav-link">Upload CSV</router-link>
+        </li>
+        <li class="nav-item">
+          <router-link to="/steps" class="nav-link">Steps Demo</router-link>
+        </li>
 
         <li class="nav-item">
           <router-link to="/login" class="nav-link">Login</router-link>
