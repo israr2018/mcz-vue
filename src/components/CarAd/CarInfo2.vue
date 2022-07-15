@@ -1,15 +1,12 @@
 <script>
-
 export default {
    name:'Info',
    components: {
-    
   }, 
-  props:{
-   carData:{
-    model_year:""
-   }
-  },
+  props:[
+    'modelYear'
+  ],
+  
   data(){
     return {
         step:2,
@@ -18,19 +15,19 @@ export default {
         }
     }
   },
-  created(){
-    this.fields.model_year=this.carData.model_year;
-  },
 //   emits:[
 //     'update:model_year'
 //   ],
   emits:[
     'add-carInfo'
   ],
+  mounted() {
+    console.log(`modelYear :`);
+    // this.fields.model_year=this.modelYear;
+  },
   methods: { 
     register(e) {
         console.log("event");
-        console.log(this.fields)
         this.$emit('add-carInfo',{ ...this.fields,step:this.step})
         // this.$emit('add-carInfo',{...values})
        e.preventDefault();
@@ -42,8 +39,8 @@ export default {
      <form @submit="register">
             <div class="grid">
               <div>
-                <input v-model="fields.model_year" type="text" placeholder="Add an item" />
-              </div>
+                <input type="text" v-model=fields.model_year placeholder="Add an item" />
+              </div> 
              
               <div class="col-12">
               <!--    <Button  label="Previous " style="margin-left: .5em"/> -->
@@ -52,7 +49,7 @@ export default {
                   </button>
                 <!--   <Button label="Submit" style="margin-left: .5em" /> -->
               </div>
-              {{this.carInfo.model_year}}
             </div>
+            {{modelYear}}
      </form>
 </template>

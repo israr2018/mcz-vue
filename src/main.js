@@ -1,4 +1,6 @@
 import { createApp } from 'vue'
+import { createPinia } from 'pinia'
+const pinia = createPinia()
 import App from './App.vue'
 import PrimeVue from 'primevue/config';
 import 'primevue/resources/themes/saga-blue/theme.css'       //theme
@@ -36,4 +38,5 @@ app.component("Steps", Steps);
 
 app.use(PrimeVue);
 app.use(router)
+app.use(pinia)
 app.mount('#app')

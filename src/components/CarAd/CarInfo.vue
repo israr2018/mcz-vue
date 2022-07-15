@@ -11,35 +11,35 @@ export default {
     Form,
     Field,
   }, 
-  props:{
-    model_year:String
-  },
   data(){
     return {
         schema,
+        model_year:'',
         step:2,
-        data:{
-            model_year:""
+        form:{
+          model_year:''
         }
+        
     }
   },
-//   emits:[
-//     'update:model_year'
-//   ],
   emits:[
     'add-carInfo'
   ],
   methods: {
     register(values) {
       console.log(values);
-        this.$emit('add-carInfo',{...values,step:this.step})
+      this.$emit('add-carInfo',{...values,step:this.step})
     //    this.$emit('add-carInfo',{...values})
     },
-    modelYearChange(e){
-        console.log(e.target.value)
-        // this.$emit('add-carInfo',e.target.value)
+    inputHandler(e){
+      this.model_year=e.target.value;
     }
-  },
+  
+    },
+    mounted(){
+      // this.form.model_year=2036
+      this.model_year=2036
+    }
 }
 </script>
 <template>
@@ -56,8 +56,10 @@ export default {
                         placeholder="model year"
                         :class="{ 'p-invalid': errors.length > 0 }"
                         v-bind="field"
-                        @input="modelYearChange"
-                        :value=field.value
+                        name="field"
+                        :value="model_year"
+                        @input="inputHandler"
+                      
                     />
                     </div>
                     <small class="p-inputgroup p-error" v-if="errors.length > 0"
@@ -68,8 +70,8 @@ export default {
             </div>
             <div class="col-12">
              <!--    <Button  label="Previous " style="margin-left: .5em"/> -->
-                <Button  label="Next" style="margin-left: .5em"/>
-              <!--   <Button label="Submit" style="margin-left: .5em" /> -->
+                <!-- <Button  label="Next" style="margin-left: .5em"/> -->
+                <Button  type="submit" label="Next" style="margin-left: .5em" />
             </div>
             </div>
      </Form>

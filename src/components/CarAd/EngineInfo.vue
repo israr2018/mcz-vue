@@ -2,7 +2,7 @@
 import { Form, Field } from "vee-validate";
 import * as yup from "yup";
 const schema = yup.object().shape({
-  engine_type: yup.string().required().label("car model year"),
+  engine_type: yup.string().required().label("engine type"),
 
 });
 export default {
@@ -15,8 +15,20 @@ export default {
         return {
             nextStep:3,
             prevStep:1,
-            schema
+            schema,
+            engine_types:[
+              {label:"Petrol",value:"petrol"},
+              {label:"Diesel",value:"diesel"},
+              {label:"Hybrid",value:"hybrid"},
+
+            ],
+            transmission_types:[
+              {label:"Manual",value:"manual"},
+              {label:"Automatic",value:"automatic"}
+
+            ] 
         }
+        
     },
     emits:[
     'add-carInfo'
@@ -44,19 +56,75 @@ export default {
             <div class="grid">
              <div class="col-6">
                 <Field
-                v-slot="{ field, errors }"
+                v-slot="{ field, errors,handleChange }"
+                v-model="engine_type"
                 name="engine_type"
                 >
                 <div class="p-col-6">
                     <div class="p-inputgroup">
-                    <InputText
+                    <Dropdown
                         placeholder="Engine Type"
+                        :options="engine_types"
+                        optionLabel='label'
+                        optionValue='value'
+                        :model-value="field.value"
+                        @update:modelValue="handleChange"
+
                         :class="{ 'p-invalid': errors.length > 0 }"
-                        v-bind="field"
+                        
                     />
                     </div>
                     <small class="p-inputgroup p-error" v-if="errors.length > 0"
-                    >Car model  is invalid
+                    >Engine type is invalid
+                    </small>
+                </div>
+                </Field>
+            </div>
+             <div class="col-6">
+                <Field
+                v-slot="{ field, errors,handleChange }"
+                v-model="transmission_type"
+                name="transmission_type"
+                >
+                <div class="p-col-6">
+                    <div class="p-inputgroup">
+                    <Dropdown
+                        placeholder="Transmission Type"
+                        :options="transmission_types"
+                        optionLabel='label'
+                        optionValue='value'
+                        :model-value="field.value"
+                        @update:modelValue="handleChange"
+
+                        :class="{ 'p-invalid': errors.length > 0 }"
+                        
+                    />
+                    </div>
+                    <small class="p-inputgroup p-error" v-if="errors.length > 0"
+                    >Engine type is invalid
+                    </small>
+                </div>
+               
+                </Field>
+            </div>
+             <div class="col-6">
+                <Field
+                v-slot="{ field,errors }"
+                v-model="engine_capacity"
+                name="engine_capacity"
+                
+                >
+                <div class="p-col-6">
+                    <div class="p-inputgroup">
+                    <InputText
+                        placeholder="Engince capacity 1000cc"
+                        :class="{ 'p-invalid': errors.length > 0 }"
+                        v-bind="field"
+                        
+                    />
+                    </div>
+                    <small class="p-inputgroup p-error" v-if="errors.length > 0"
+                    >engine capacity  is invalid
                     </small>
                 </div>
                 </Field>
