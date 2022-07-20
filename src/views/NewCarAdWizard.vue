@@ -5,12 +5,14 @@
 import CarInfo4 from '../components/CarAd/CarInfo4.vue'
 import EngineInfo from '../components/CarAd/EngineInfo.vue'
 import SellerInfo from '../components/CarAd/SellerInfo.vue'
+import SampleForm2 from '../views/SampleForm2.vue'
 export default {
     name:'NewCarAd',
     components:{
         'car-info4':CarInfo4,
         'engine-info':EngineInfo,
-        'seller-info':SellerInfo
+        'seller-info':SellerInfo,
+        'sample-form2':SampleForm2
     },
     
        data(){
@@ -22,10 +24,11 @@ export default {
                 4: "Transmission Info",
                 5: "Seller Info",
                 6: "Uplaod Car Pics",
-                7:  "Preview Form"
+                7:  "Preview Form",
+                8:  "Sign up Form"
 
             },
-            step:1,
+            step:8,
            
         }
     },
@@ -53,6 +56,7 @@ export default {
             <car-info4  v-if="step==1"   @add-carInfo="addCarInfo"  />
             <engine-info v-if="step==2"   @add-carInfo="addCarInfo"  />
             <seller-info v-if="step==3"   @add-carInfo="addCarInfo"  />
+            <sample-form2 v-if="step==8"   @add-carInfo="addCarInfo"  />
            
         </template>
        
